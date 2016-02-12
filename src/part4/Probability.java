@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Random;
 
 public class Probability
 {
@@ -143,9 +144,25 @@ public class Probability
         return probabilities;
     }
 
+    private Integer pick()
+    {
+        Double random = new Random().nextDouble();
+        Double cumulativeProbability = 0.0;
+        for(int counter = 0; counter < probabilities.length; counter++)
+        {
+            cumulativeProbability += probabilities[counter];
+            if(random <= cumulativeProbability)
+            {
+                return counter;
+            }
+        }
+        return null;
+    }
+
     public void compute()
     {
         this.probabilities = read(path);
+        System.out.println(pick());
     }
 
     public static void main(String args[])
