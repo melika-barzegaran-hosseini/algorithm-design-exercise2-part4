@@ -153,7 +153,7 @@ public class Probability
             cumulativeProbability += probabilities[counter];
             if(random <= cumulativeProbability)
             {
-                return counter;
+                return (counter + 1);
             }
         }
         return null;
@@ -162,7 +162,17 @@ public class Probability
     public void compute()
     {
         this.probabilities = read(path);
-        System.out.println(pick());
+
+        Integer[] numbers = {30, 300, 3000, 30000};
+        for(Integer number : numbers)
+        {
+            int sum = 0;
+            for(int counter = 0; counter < number; counter++)
+            {
+                sum += pick();
+            }
+            System.out.format("number of pickings = %-5d   E(x) = %f\n", number, (new Double(sum)/number));
+        }
     }
 
     public static void main(String args[])
